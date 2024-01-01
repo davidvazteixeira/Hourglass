@@ -4,14 +4,14 @@ An uptime library that do not overlap.
 
 Just two lines to make the library work:
 
-```
-#include <Hourglass.h>            // First: The include
-
-void loop() {
-  LOOP_HOURGLASS(my_hourglass);       // Second: The macro call
-
-  ...
-}
+```c++
+  #include <Hourglass.h>             // First: The include
+  
+  void loop() {
+    LOOP_HOURGLASS(my_hourglass);    // Second: The macro call
+  
+    ...
+  }
 ```
 
 LOOP_HOURGLASS is a macro that:
@@ -27,7 +27,7 @@ Check the library examples.
 
 Returns uptime in seconds in decimal form.
 
-```
+```c++
   float uptime = my_hourglass.now();
   Serial.println(uptime);
 ```
@@ -36,7 +36,7 @@ Returns uptime in seconds in decimal form.
 
 Set a value different then zero.
 
-```
+```c++
   my_hourglass.set(10);
 ```
 
@@ -44,7 +44,7 @@ Set a value different then zero.
 
 Clear the hourglass.
 
-```
+```c++
   my_hourglass.reset();
 ```
 
@@ -52,7 +52,7 @@ Clear the hourglass.
 
 Update the hourglass.
 
-```
+```c++
   my_hourglass.reset();
 ```
 
@@ -62,14 +62,14 @@ You do not need to use the macro LOOP_HOURGLASS. To work, you need to do two thi
 
 Create a hourglass variable:
 
-```
-Hourglass hourglass;
+```c++
+  Hourglass hourglass;
 ```
 
 and call the method `update`
 
-```
-hourglass.update();
+```c++
+  hourglass.update();
 ```
 
 The macro creates a **static variable** inside `loop()` to keep the time but you could use global variables.
@@ -78,18 +78,18 @@ The macro creates a **static variable** inside `loop()` to keep the time but you
 
 Each instance of hourglass keep track of its time. you just need to update every hourglass.
 
-```
-Hourglass h1;
-Hourglass h2;
-Hourglass h3;
-
-void loop() {
-  h1.update();
-  h2.update();
-  h3.update();
-
-  ...
-}
+```c++
+  Hourglass h1;
+  Hourglass h2;
+  Hourglass h3;
+  
+  void loop() {
+    h1.update();
+    h2.update();
+    h3.update();
+  
+    ...
+  }
 ```
 
 > Note: As any method, `update` consumes some time to be called and executed. The three hourglass h1, h2 and h3 will differ in some microseconds (h3 > h2 > h1) so expect an error of order 10⁻⁵ s between each hourglass.
