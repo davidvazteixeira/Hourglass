@@ -14,9 +14,6 @@
 
 class Hourglass {
   private:
-    // Static variables for counting and storing instances
-    static size_t instanceCount;
-    static std::vector<Hourglass*> instanceList;
     static bool global_unset_output;
     static Stream* global_output;
 
@@ -39,49 +36,44 @@ class Hourglass {
     String name;
     double seconds;
     unsigned long t0;
+    static std::vector<Hourglass*> list;
 
     Hourglass() {
-      instanceCount++;
-      instanceList.push_back(this);
+      list.push_back(this);
+    }
+
+    ~ Hourglass () {
+      for(short i = 0; i<list.size(); i++) {
+        if (this == list[i]) {
+          list.erase(list.begin() + i);
+          break;
+        }
+      }
     }
 
     Hourglass(Stream &stream) {
-      instanceCount++;
-      instanceList.push_back(this);
+      list.push_back(this);
 
       setOutput(stream);
     }
 
     Hourglass(double start) {
-      instanceCount++;
-      instanceList.push_back(this);
+      list.push_back(this);
 
       reset(start);
     }
 
     static size_t getCount() {
-        return instanceCount;
-    }
-
-    static std::vector<Hourglass*> getList() {
-      return instanceList;
-    }
-
-    static Hourglass *getHourglass(short n = 0) {
-      return Hourglass::getList()[n];
+      return list.size();
     }
 
     static void summary(char unit = 's') {
       if (global_unset_output) return;
 
-      Hourglass *hourglass;
-
-      for(short i = 0; i<Hourglass::instanceCount; i++) {
-        hourglass = getHourglass(i);
-
-        global_output->print(hourglass->name);
+      for(short i = 0; i<list.size(); i++) {
+        global_output->print(list[i]->name);
         global_output->print(": ");
-        global_output->print(hourglass->elapsed(unit));
+        global_output->print(list[i]->elapsed(unit));
         global_output->print(" | ");
       }
       global_output->print("Unit: ");
@@ -99,21 +91,20 @@ class Hourglass {
       unset_output = false;
     }
 
-    template <typename T>
-    void reset(T value = 0.0) {
+    static void resetId(short id, double value = 0.0) {
+      list[id]->reset(value);
+    }
+
+    void reset(double value = 0.0) {
       t0 = micros();
       seconds = (double) value;
     }
 
     static void updateAll() {
       unsigned long t1 = micros();
-      Hourglass *hourglass;
-
-      for(short i = 0; i<Hourglass::instanceCount; i++) {
-        hourglass = getHourglass(i);
-
-        hourglass->seconds += (t1 - hourglass->t0)/1000000.0;
-        hourglass->t0 = t1;
+      for(short i = 0; i<list.size(); i++) {
+        list[i]->seconds += (t1 - list[i]->t0)/1000000.0;
+        list[i]->t0 = t1;
       }
     }
 
@@ -148,9 +139,8 @@ class Hourglass {
     }
 };
 
-#endif
-
-size_t Hourglass::instanceCount = 0;
 bool Hourglass::global_unset_output = true;
 Stream* Hourglass::global_output;
-std::vector<Hourglass*> Hourglass::instanceList;
+std::vector<Hourglass*> Hourglass::list;
+
+#endif
