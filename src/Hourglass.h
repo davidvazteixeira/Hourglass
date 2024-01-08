@@ -56,6 +56,18 @@
       void print(char unit = 's') {
         RETURN_IF_NO_OUTPUT;
 
+        if(unit == 'a') {
+          if(seconds < 60.0) {  /* less than minute is second */
+            unit = 's';
+          } else if (seconds < 60*60.0) { /* less than hour is minute */
+            unit = 'm';
+          } else if (seconds < 60*60.0*24.0) { /* less than day is hour */
+            unit = 'h';
+          } else { /* anything alse is day */
+            unit = 'd';
+          }
+        }
+
         output->print(elapsed(unit));
         print_unit(unit);
       }
