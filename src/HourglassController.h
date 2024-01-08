@@ -124,6 +124,11 @@
       bool neverCreated;
 
   };
-  HourglassController Hourglasses;
+
+  #ifdef HOURGLASS_CONTROLLER_NAME
+    HourglassController HOURGLASS_CONTROLLER_NAME;
+  #else
+    HourglassController Hourglasses;
+  #endif
 
 #endif
