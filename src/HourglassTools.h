@@ -1,22 +1,29 @@
 #ifndef Hourglass_Tools_h
   #define Hourglass_Tools_h
 
-class HourglassSerialTools {
+class HourglassToolsClass {
     public:
-      void resetTool() {
-        short id = Serial.parseInt();
-        float start = Serial.parseFloat();
+      void serialReset() {
+        char cmd = Serial.read();
         while(Serial.available()) Serial.read();
 
-        Serial.print(">>> Chronometer ");
-        Serial.print(id);
-        Serial.print(" set to ");
-        Serial.print(start);
-        Serial.println(" s.");
-
-        Hourglass::reset(id, start);
+        if(cmd == 'a') {
+          Hourglasses.reset_all();
+          Serial.println("Reset all hourglasses");
+        } else {
+          short id = cmd - 48;
+          if(id >=0 && id < Hourglasses.count() ) {
+            Hourglasses.reset(id);
+            Serial.print("Reset hourglass #");
+            Serial.println(id);
+          } else {
+            Serial.println("Out of range");
+            Serial.print("from 0 to ");
+            Serial.println(Hourglasses.count() - 1);
+          }
+        }
       }
   };
-  HourglassSerialTools HourglassSerial;
+  HourglassToolsClass HourglassTools;
 
   #endif
