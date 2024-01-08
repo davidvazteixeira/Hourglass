@@ -84,6 +84,40 @@
         output->println();
       }
 
+      void timestampln() {
+        timestamp();
+        output->println();
+      }
+
+      void timestamp() {
+        double aux = seconds;
+        int value;
+
+        while(aux > 1) {
+          if(aux > DAY) {
+            value = aux/DAY;
+            output->print(value);
+            output->print("d");
+            aux -= value*DAY;
+          } else if(aux > HOUR) {
+            value = aux/HOUR;
+            output->print(value);
+            output->print("h");
+            aux -= value*HOUR;
+          } else if(aux > MINUTE) {
+            value = aux/MINUTE;
+            output->print(value);
+            output->print("m");
+            aux -= value*MINUTE;
+          } else if(aux > SECOND) {
+            value = aux/SECOND;
+            output->print(value);
+            output->print("s");
+            return;
+          }
+        }
+      }
+
       void info(char unit = 's') {
         RETURN_IF_NO_OUTPUT;
 
