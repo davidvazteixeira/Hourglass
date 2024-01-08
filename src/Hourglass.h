@@ -28,9 +28,15 @@
         has_output = true;
       }
 
-      void reset(double value = 0.0) {
+      void reset(double value = 0.0, char unit = 's') {
         t0 = micros();
-        seconds = value;
+        switch(unit) {
+          case 's': seconds = value; break;
+          case 'm': seconds = value*60.0; break;
+          case 'h': seconds = value*60.0*60.0; break;
+          case 'd': seconds = value*60.0*60.0*24.0; break;
+        }
+
       }
 
       double elapsed() {
