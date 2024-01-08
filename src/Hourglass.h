@@ -13,7 +13,11 @@
     public:
       String name;
 
-      Hourglass() {}
+      Hourglass() {
+        #ifndef HOURGLASS_START_WITHOUT_OUTPUT
+          setOutput(Serial);
+        #endif
+      }
 
       Hourglass(Stream &stream) {
         setOutput(stream);
@@ -54,6 +58,21 @@
         RETURN_IF_NO_OUTPUT;
 
         print(unit);
+        output->println();
+      }
+
+      void info(char unit = 's') {
+        RETURN_IF_NO_OUTPUT;
+
+        if(name.length()) {
+          output->print(name);
+          output->print(": ");
+        }
+        print(unit);
+      }
+
+      void infoln(char unit = 's') {
+        info(unit);
         output->println();
       }
 
