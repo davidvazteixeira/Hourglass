@@ -10,16 +10,21 @@ Hourglass days;
 void setup() {
   Serial.begin(115200);
   seconds.name = "s";
-  seconds.reset(0);
+  seconds.reset(1);
+  // Default is always seconds
+  // Macro alternative: seconds.reset(0*SECOND);
 
   minutes.name = "m";
   minutes.reset(1, 'm');
+  // Macro alternative: minutes.reset(1*MINUTE);
 
   hours.name = "h";
   hours.reset(1, 'h');
+  // Macro alternative: hours.reset(1*HOUR);
 
   days.name = "d";
   days.reset(1, 'd');
+  // Macro alternative: days.reset(1*DAY);
 }
 
 void loop() {

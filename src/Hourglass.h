@@ -9,6 +9,11 @@
   #include "Arduino.h"
   #define RETURN_IF_NO_OUTPUT if (!has_output) return
 
+  #define SECOND (1.0)
+  #define MINUTE (SECOND*60.0)
+  #define HOUR (MINUTE*60.0)
+  #define DAY (HOUR*24.0)
+
   class Hourglass {
     public:
       String name;
@@ -32,9 +37,9 @@
         t0 = micros();
         switch(unit) {
           case 's': seconds = value; break;
-          case 'm': seconds = value*60.0; break;
-          case 'h': seconds = value*60.0*60.0; break;
-          case 'd': seconds = value*60.0*60.0*24.0; break;
+          case 'm': seconds = value*MINUTE; break;
+          case 'h': seconds = value*HOUR; break;
+          case 'd': seconds = value*DAY; break;
         }
 
       }
@@ -46,9 +51,9 @@
       double elapsed(char unit) {
         switch(unit) {
           case 's': return seconds;
-          case 'm': return seconds/60.0;
-          case 'h': return seconds/3600.0;
-          case 'd': return seconds/(3600.0*24.0);
+          case 'm': return seconds/MINUTE;
+          case 'h': return seconds/HOUR;
+          case 'd': return seconds/DAY;
           default:  return NULL;
         }
       }
@@ -57,11 +62,11 @@
         RETURN_IF_NO_OUTPUT;
 
         if(unit == 'a') {
-          if(seconds < 60.0) {  /* less than minute is second */
+          if(seconds < MINUTE) {  /* less than minute is second */
             unit = 's';
-          } else if (seconds < 60*60.0) { /* less than hour is minute */
+          } else if (seconds < HOUR) { /* less than hour is minute */
             unit = 'm';
-          } else if (seconds < 60*60.0*24.0) { /* less than day is hour */
+          } else if (seconds < DAY) { /* less than day is hour */
             unit = 'h';
           } else { /* anything alse is day */
             unit = 'd';
@@ -100,7 +105,6 @@
         t0 = t1;
       }
 
-
     private:
       double seconds = 0;
       Stream* output;
@@ -110,12 +114,7 @@
       void print_unit(char unit) {
         RETURN_IF_NO_OUTPUT;
 
-        switch(unit) {
-          case 's':
-          case 'h':
-          case 'd': output->print(unit); break;
-          case 'm': output->print("min"); break;
-        }
+        output->print(unit);
       }
   };
 

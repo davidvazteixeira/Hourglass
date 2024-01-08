@@ -71,7 +71,7 @@
             output->print(list[i].name);
             output->print(": ");
           }
-          list[i].print();
+          list[i].print('a');
           output->print(" | ");
         }
         output->println();
