@@ -23,7 +23,7 @@ void serialEvent() {
 }
 
 void loop() {
-  /* Manually update hourglasses */
+  /* Syncronize the hourglasses */
   uptime.sync();
   chrono.sync();
 

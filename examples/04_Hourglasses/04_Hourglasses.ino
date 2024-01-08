@@ -16,7 +16,7 @@ void serialEvent() {
 }
 
 void loop() {
-  /* Install a main hourglass in loop() and create a new variable */
+  /* Syncronize the hourglasses */
   Hourglasses.sync();
 
   /* Print hourglasses */

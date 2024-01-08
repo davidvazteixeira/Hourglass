@@ -12,7 +12,7 @@ void setup() {
 }
 
 void loop() {
-  /* Manually Update the secondary hourglass */
+  /* Syncronize the hourglasses */
   chronometer.sync();
 
   /* Print ellapsed time in many units */

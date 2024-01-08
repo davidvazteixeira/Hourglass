@@ -2,7 +2,7 @@
 #include <Hourglass.h>
 
 /* Hourglass object*/
-Hourglass hourglass(Serial);
+Hourglass hourglass;
 
 void setup() {
   Serial.begin(115200);

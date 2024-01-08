@@ -2,7 +2,7 @@
 
 #include <Hourglass.h>
 
-Hourglass hourglass(Serial);
+Hourglass hourglass;
 
 void setup() {
   Serial.begin(115200);
@@ -10,15 +10,14 @@ void setup() {
 
 /* Send anything to serial to reset the clock */
 void serialEvent() {
-  if (!Serial.available()) return;
-
   while (Serial.available()) Serial.read();
+
   hourglass.reset();
   Serial.println("Reset hourglass.");
 }
 
 void loop() {
-  /* Manually update the hourglass */
+  /* Syncronize the hourglass */
   hourglass.sync();
 
   /* Print ellapsed time in seconds */
