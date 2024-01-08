@@ -1,18 +1,19 @@
 /* Create one hourglass in the simplest usage */
-
 #include <Hourglass.h>
+
+/* Hourglass object*/
+Hourglass hourglass(Serial);
 
 void setup() {
   Serial.begin(115200);
 }
 
 void loop() {
-  /* Install the hourglass in loop() and create a new variable */
-  LOOP_HOURGLASS(uptime);
+  /* Syncronize the hourglass */
+  hourglass.sync();
 
   /* Print ellapsed time in seconds */
-  Serial.print(uptime.now());
-  Serial.println(" s");
+  hourglass.println();
 
   /* do something ... */
   delay(1000);
