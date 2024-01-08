@@ -6,6 +6,7 @@ Hourglass hourglass;
 
 void setup() {
   Serial.begin(115200);
+  hourglass.reset(1*DAY + 23*HOUR + 59*MINUTE + 50*SECOND);
 }
 
 void loop() {
@@ -13,7 +14,7 @@ void loop() {
   hourglass.sync();
 
   /* Print ellapsed time in seconds */
-  hourglass.println();
+  hourglass.timestampln();
 
   /* do something ... */
   delay(1000);
