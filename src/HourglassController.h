@@ -30,7 +30,7 @@
       void print_all(char line = 'C') {
         eachHourglass(id) {
           list[id].print();
-          line == 'L' ? output->println(): output->print(" | ");
+          line == 'R' ? output->println(): output->print(" | ");
         }
         if(line == 'C') output->println();
       }
@@ -53,10 +53,6 @@
       void remove(short id) {
         list.erase(list.begin() + id);
         size = list.size();
-      }
-
-      size_t length() {
-        return size;
       }
 
       double elapsed(short id) {
