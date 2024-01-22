@@ -216,6 +216,21 @@ A debug tool to use with HourglassController. It asks for an id (or 'a' for all)
 
 Note: Safe. It checks for bounds. If `id` value do not exists, a friendly error message in Serial will be shown.
 
+### Didn't like the tools's name HourglassTools?
+
+Define a new name **before** the #include:
+
+```{c++}
+  #define HOURGLASS_TOOLS_NAME hgt
+  #include <HourglassTools.h>
+```
+
+Now you can use like:
+
+```{c++}
+  hgt.serialReset();
+```
+
 ## HourglassController
 
 ### Use case
@@ -263,6 +278,21 @@ However, the HourglassController instance 'Hourglasses` has many tools to manage
 > Note: Only hourglasses created with `create` method will be seen by the controller.
 
 To simplify the doc, the next sections assumes that you call Hourglasses.create(N), with N at least 1 (default);
+
+### Didn't like the controller's name Hourglasses?
+
+Define a new name **before** the #include:
+
+```{c++}
+  #define HOURGLASS_CONTROLLER_NAME hgc
+  #include <HourglassController.h>
+```
+
+Now you can use like:
+
+```{c++}
+  hgc.sync();
+```
 
 ### HourglassController: void create(short num = 1)
 

@@ -124,7 +124,8 @@
   #ifdef HOURGLASS_CONTROLLER_NAME
     HourglassController HOURGLASS_CONTROLLER_NAME;
   #else
-    HourglassController Hourglasses;
+    #define HOURGLASS_CONTROLLER_NAME Hourglasses
+    HourglassController HOURGLASS_CONTROLLER_NAME;
   #endif
 
 #endif
