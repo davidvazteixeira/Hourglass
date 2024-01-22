@@ -5,23 +5,23 @@
 
   class HourglassToolsClass {
       public:
-        void serialReset() {
+        void serialReset(HourglassController &controller) {
           char cmd = Serial.read();
           while(Serial.available()) Serial.read();
 
           if(cmd == 'a') {
-            HOURGLASS_CONTROLLER_NAME.reset_all();
+            controller.reset_all();
             Serial.println("Reset all hourglasses");
           } else {
             short id = cmd - 48;
-            if(id >=0 && id < HOURGLASS_CONTROLLER_NAME.count() ) {
-              HOURGLASS_CONTROLLER_NAME.reset(id);
+            if(id >=0 && id < controller.count() ) {
+              controller.reset(id);
               Serial.print("Reset hourglass #");
               Serial.println(id);
             } else {
               Serial.println("Out of range");
               Serial.print("from 0 to ");
-              Serial.println(HOURGLASS_CONTROLLER_NAME.count() - 1);
+              Serial.println(controller.count() - 1);
             }
           }
         }

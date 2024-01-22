@@ -210,7 +210,7 @@ A debug tool to use with HourglassController. It asks for an id (or 'a' for all)
 ```{c++}
   void serialEvent() {
     /* Send a number (id) or 'a' (all) to reset the hourglass */
-    HourglassTools.serialReset();
+    HourglassTools.serialReset(Hourglasses);
   }
 ```
 
@@ -228,7 +228,7 @@ Define a new name **before** the #include:
 Now you can use like:
 
 ```{c++}
-  hgt.serialReset();
+  hgt.serialReset(Hourglasses);
 ```
 
 ## HourglassController
