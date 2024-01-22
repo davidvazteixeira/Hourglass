@@ -5,8 +5,6 @@
   #include <Hourglass.h>
   #include <vector>
 
-  #define eachHourglass(var) for(short var = 0; var<size; var++)
-
   class HourglassController {
     public:
       void print(short id, char unit = 's') {
@@ -28,8 +26,8 @@
       }
 
       void print_all(char line = 'C') {
-        eachHourglass(id) {
-          list[id].print();
+        for(Hourglass &hourglass: list) {
+          hourglass.print();
           line == 'R' ? output->println(): output->print(" | ");
         }
         if(line == 'C') output->println();
@@ -47,7 +45,7 @@
 
       void sync() {
         if(neverCreated) create();
-        eachHourglass(id) list[id].sync();
+        for(Hourglass &hourglass: list) hourglass.sync();
       }
 
       void remove(short id) {
@@ -62,12 +60,12 @@
       void summary() {
         if (unset_output) return;
 
-        eachHourglass(i) {
-          if(list[i].name.length()) {
-            output->print(list[i].name);
+        for(Hourglass &hourglass: list) {
+          if(hourglass.name.length()) {
+            output->print(hourglass.name);
             output->print(": ");
           }
-          list[i].print('a');
+          hourglass.print('a');
           output->print(" | ");
         }
         output->println();
@@ -84,12 +82,14 @@
       }
 
       short find(String name) {
-        eachHourglass(id) { if(name == list[id].name) return id; }
+        for(short id = 0; id<size; id++) {
+          if(name == list[id].name) return id;
+        }
         return -1;
       }
 
       void reset_all(double value = 0.0) {
-        eachHourglass(id) list[id].reset(value);
+        for(Hourglass &hourglass: list) hourglass.reset(value);
       }
 
       void reset(short id, double value = 0.0) {
