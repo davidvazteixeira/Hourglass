@@ -6,8 +6,6 @@
 #ifndef Hourglass_h
   #define Hourglass_h
 
-  #include "Arduino.h"
-
   #define SECOND (1.0)
   #define MINUTE (SECOND*60.0)
   #define HOUR (MINUTE*60.0)

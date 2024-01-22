@@ -1,4 +1,3 @@
-#include "Arduino.h"
 #include <Hourglass.h>
 #include <vector>
 
