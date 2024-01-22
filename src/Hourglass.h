@@ -7,7 +7,6 @@
   #define Hourglass_h
 
   #include "Arduino.h"
-  #define RETURN_IF_NO_OUTPUT if (!has_output) return
 
   #define SECOND (1.0)
   #define MINUTE (SECOND*60.0)
@@ -59,7 +58,7 @@
       }
 
       void print(char unit = 's') {
-        RETURN_IF_NO_OUTPUT;
+        if (!has_output) return;
 
         if(unit == 'a') {
           if(seconds < MINUTE) {  /* less than minute is second */
@@ -78,7 +77,7 @@
       }
 
       void println(char unit = 's') {
-        RETURN_IF_NO_OUTPUT;
+        if (!has_output) return;
 
         print(unit);
         output->println();
@@ -119,7 +118,7 @@
       }
 
       void info(char unit = 's') {
-        RETURN_IF_NO_OUTPUT;
+        if (!has_output) return;
 
         if(name.length()) {
           output->print(name);
@@ -146,7 +145,7 @@
       unsigned long t0;
 
       void print_unit(char unit) {
-        RETURN_IF_NO_OUTPUT;
+        if (!has_output) return;
 
         output->print(unit);
       }
