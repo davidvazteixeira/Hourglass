@@ -200,35 +200,36 @@ HourglassTools depends on Hourglass and will include that for you, so it's usele
 The above include will instanciate an object for you for easy use:
 
 ```{c++}
-  HourglassToolsClass HourglassTools;
+  HourglassTools::Serial HourglassSerial;
 ```
 
-### HourglassTools: void serialReset
+### HourglassTools::Serial - void reset
 
 A debug tool to use with HourglassController. It asks for an id (or 'a' for all) to reset a hourglass. Just call inside serialEvent method.
 
 ```{c++}
   void serialEvent() {
     /* Send a number (id) or 'a' (all) to reset the hourglass */
-    HourglassTools.serialReset(Hourglasses);
+    HourglassSerial.reset(Hourglasses);
   }
 ```
 
 Note: Safe. It checks for bounds. If `id` value do not exists, a friendly error message in Serial will be shown.
 
-### Didn't like the tools's name HourglassTools?
+### Didn't like the HourglassTools instance name?
 
-Define a new name **before** the #include:
+Include the "Base" alternative and instanciate yourself:
 
 ```{c++}
-  #define HOURGLASS_TOOLS_NAME hgt
-  #include <HourglassTools.h>
+  #include <HourglassToolsBase.h>
+
+  HourglassTools::Serial hgts;
 ```
 
 Now you can use like:
 
 ```{c++}
-  hgt.serialReset(Hourglasses);
+  hgts.reset(Hourglasses);
 ```
 
 ## HourglassController
@@ -279,13 +280,14 @@ However, the HourglassController instance 'Hourglasses` has many tools to manage
 
 To simplify the doc, the next sections assumes that you call Hourglasses.create(N), with N at least 1 (default);
 
-### Didn't like the controller's name Hourglasses?
+### Didn't like the HourglassController instance name?
 
-Define a new name **before** the #include:
+Include the "Base" alternative and instanciate yourself:
 
 ```{c++}
-  #define HOURGLASS_CONTROLLER_NAME hgc
-  #include <HourglassController.h>
+  #include <HourglassControllerBase.h>
+
+  HourglassController hgc;
 ```
 
 Now you can use like:

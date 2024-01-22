@@ -12,7 +12,7 @@ void setup() {
 
 void serialEvent() {
   /* Send a number (id) or 'a' (all) to reset the hourglass */
-  HourglassTools.serialReset(Hourglasses);
+  HourglassSerial.reset(Hourglasses);
 }
 
 void loop() {
