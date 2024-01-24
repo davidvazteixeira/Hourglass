@@ -214,13 +214,13 @@ Include the "Base" alternative and instanciate yourself:
 ```c++
   #include <HourglassToolsBase.h>
 
-  HourglassTools::Serial hgts;
+  HourglassTools::Serial hgt;
 ```
 
 Now you can use like:
 
 ```c++
-  hgts.reset(Hourglasses);
+  hgt.reset(Hourglasses);
 ```
 
 ## HourglassController
@@ -313,8 +313,8 @@ Remove from memory the hourglass
 Set the name of a hourglass;
 
 ```c++
-  Hourglasses.serName(0, "clock1");
-  Hourglasses.serName(1, "clock2");
+  Hourglasses.setName(0, "clock1");
+  Hourglasses.setName(1, "clock2");
 ```
 
 ### HourglassController: void sync()
