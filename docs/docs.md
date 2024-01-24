@@ -13,7 +13,7 @@ You will need 4 things:
 
 you could check the included `01_Bare.ino` example:
 
-```{c++}
+```c++
   /* Create one hourglass in the simplest usage */
   #include <Hourglass.h>
 
@@ -38,7 +38,7 @@ you could check the included `01_Bare.ino` example:
 
 The method `println()` is one of the extra tools of this library. If you want to get the value, use:
 
-```{c++}
+```c++
   double value = hourglass.elapsed();  // returns, by default, time in seconds as double;
 ```
 
@@ -48,7 +48,7 @@ The method `println()` is one of the extra tools of this library. If you want to
 
 You can use these methods in hourglass objects. For simplicity, the text is based on this instatiation:
 
-```{c++}
+```c++
   Hourglass hourglass;
 ```
 
@@ -58,7 +58,7 @@ You can use these methods in hourglass objects. For simplicity, the text is base
 
 A hourglass can be named. Some methods optionally use this.
 
-```{c++}
+```c++
   hourglass.name = "clock";
 ```
 
@@ -69,7 +69,7 @@ A hourglass can be named. Some methods optionally use this.
 
 The most important method of the lib. It syncs the time using the Arduino STD lib micros().
 
-```{c++}
+```c++
   hourglass.sync();
 ```
 
@@ -79,7 +79,7 @@ Call this just before any other methods or, in fast loops, just at the beginning
 
 Get the elapsed time. Default is seconds.
 
-```{c++}
+```c++
   double seconds = hourglass.elapsed(); // or hourglass.elapsed('s');
   double minutes = hourglass.elapsed('m');
   double hours = hourglass.elapsed('h');
@@ -90,7 +90,7 @@ Get the elapsed time. Default is seconds.
 
 Reset (or set) the time. Default is zero.
 
-```{c++}
+```c++
   hourglass.reset();   // zero
   hourglass.reset(1);   // set to 1 second
   hourglass.reset(1, 's');   // set to 1 second
@@ -101,7 +101,7 @@ Reset (or set) the time. Default is zero.
 
 For a total customization, just do a time calculation using the defined macros:
 
-```{c++}
+```c++
   hourglass.reset(1*DAY + 2*HOUR + 30*MINUTE + 10*SECOND);
 
   // SECOND is just equal 1, so you can ommit
@@ -112,7 +112,7 @@ For a total customization, just do a time calculation using the defined macros:
 
 The default stream to be used in the print like methods. The default stream is Serial. Don't need to call this method in this case.
 
-```{c++}
+```c++
   String my_output;
   hourglass.setOutput(my_output);
 ```
@@ -123,7 +123,7 @@ Now, any print-like method will use my_output string and not Serial.
 
 Tool to print the values with unit to stream.
 
-```{c++}
+```c++
   hourglass.print(); // print time in seconds with "s" unit
   hourglass.print('m'); // print time in minutes with "m" unit
   hourglass.print('h'); // print time in minutes with "h" unit
@@ -132,7 +132,7 @@ Tool to print the values with unit to stream.
 
 print method has a special auto unit that selects the best representative unit for the value:
 
-```{c++}
+```c++
   hourglass.print('a'); // select the best unit based on the value.
 ```
 
@@ -145,7 +145,7 @@ Just call print with a newline. See print method.
 
 Print the value in a timestamp format.
 
-```{c++}
+```c++
   hourglass.timstamp();
 ```
 
@@ -162,7 +162,7 @@ Just call timestamp with a newline. See timestamp method.
 
 Info method prints the name with time. Or just the time when hourglass do not has a name.
 
-```{c++}
+```c++
   hourglass.info();
 ```
 
@@ -182,7 +182,7 @@ Just call info with a newline. See info method.
 
 To use the tools, you must include another file:
 
-```{c++}
+```c++
   #include <HourglassTools.h>
 ```
 
@@ -190,7 +190,7 @@ HourglassTools depends on Hourglass and will include that for you, so it's usele
 
 The above include will instanciate an object for you for easy use:
 
-```{c++}
+```c++
   HourglassTools::Serial HourglassSerial;
 ```
 
@@ -198,7 +198,7 @@ The above include will instanciate an object for you for easy use:
 
 A debug tool to use with HourglassController. It asks for an id (or 'a' for all) to reset a hourglass. Just call inside serialEvent method.
 
-```{c++}
+```c++
   void serialEvent() {
     /* Send a number (id) or 'a' (all) to reset the hourglass */
     HourglassSerial.reset(Hourglasses);
@@ -211,7 +211,7 @@ Note: Safe. It checks for bounds. If `id` value do not exists, a friendly error 
 
 Include the "Base" alternative and instanciate yourself:
 
-```{c++}
+```c++
   #include <HourglassToolsBase.h>
 
   HourglassTools::Serial hgts;
@@ -219,7 +219,7 @@ Include the "Base" alternative and instanciate yourself:
 
 Now you can use like:
 
-```{c++}
+```c++
   hgts.reset(Hourglasses);
 ```
 
@@ -233,7 +233,7 @@ The primary use of this controller is to centralize all the hourglasses.
 
 To use the controller, you must include another file:
 
-```{c++}
+```c++
   #include <HourglassController.h>
 ```
 
@@ -241,7 +241,7 @@ HourglassController depends on Hourglass and will include that for you, so it's 
 
 The above include will instanciate an object for you for easy use:
 
-```{c++}
+```c++
   HourglassController Hourglasses;
 ```
 
@@ -249,13 +249,13 @@ The above include will instanciate an object for you for easy use:
 
 If the project needs 4 hourglasses:
 
-```{c++}
+```c++
   Hourglasses.create(4);  // Creates 4 hourglasses
 ```
 
 The above method is almost equivalent to:
 
-```{c++}
+```c++
   Hourglass h1;
   Hourglass h2;
   Hourglass h3;
@@ -275,7 +275,7 @@ To simplify the doc, the next sections assumes that you call Hourglasses.create(
 
 Include the "Base" alternative and instanciate yourself:
 
-```{c++}
+```c++
   #include <HourglassControllerBase.h>
 
   HourglassController hgc;
@@ -283,7 +283,7 @@ Include the "Base" alternative and instanciate yourself:
 
 Now you can use like:
 
-```{c++}
+```c++
   hgc.sync();
 ```
 
@@ -291,7 +291,7 @@ Now you can use like:
 
 Creates a hourglass (default is 1). Each hourglass has an ID.
 
-```{c++}
+```c++
   Hourglasses.create(4); // Create four in a row
   // IDS: 0, 1, 2 and 3
 ```
@@ -302,7 +302,7 @@ Creates a hourglass (default is 1). Each hourglass has an ID.
 
 Remove from memory the hourglass
 
-```{c++}
+```c++
   Hourglasses.remove(2); // removes the 3rd hourglass. Count starts from zero.
 ```
 
@@ -312,7 +312,7 @@ Remove from memory the hourglass
 
 Set the name of a hourglass;
 
-```{c++}
+```c++
   Hourglasses.serName(0, "clock1");
   Hourglasses.serName(1, "clock2");
 ```
@@ -321,13 +321,13 @@ Set the name of a hourglass;
 
 Sync all hourglasses in a row.
 
-```{c++}
+```c++
   Hourglasses.sync();
 ```
 
 It's the same as, without the controller:
 
-```{c++}
+```c++
   Hourglass h1;
   Hourglass h2;
   Hourglass h3;
@@ -345,7 +345,7 @@ It's the same as, without the controller:
 
 Get the elapsed time of a hourglass.
 
-```{c++}
+```c++
   double value = Hourglasses.elapsed(0); // get the first hourglass seconds
 ```
 
@@ -353,7 +353,7 @@ Get the elapsed time of a hourglass.
 
 Reset time by id. Default is zero.
 
-```{c++}
+```c++
   Hourglasses.reset(0, 10);   // reset hourglass 0 to 10 seconds
 ```
 
@@ -361,7 +361,7 @@ Reset time by id. Default is zero.
 
 Reset time by name. Default is zero.
 
-```{c++}
+```c++
   Hourglasses.reset("clock1", 10); // reset hourglass "clock1" to 10 seconds
 ```
 
@@ -369,7 +369,7 @@ Reset time by name. Default is zero.
 
 Set all hourglasses to some value. Default is zero
 
-```{c++}
+```c++
   Hourglasses.reset_all(10); // reset hourglasses 10 seconds
 ```
 
@@ -377,7 +377,7 @@ Set all hourglasses to some value. Default is zero
 
 print by id.
 
-```{c++}
+```c++
   Hourglasses.print(0);
 ```
 
@@ -389,7 +389,7 @@ Just call print with a newline. Check print method.
 
 print by name.
 
-```{c++}
+```c++
   Hourglasses.print("clock1");
 ```
 
@@ -403,7 +403,7 @@ print all hourglasses in columns (default) or in rows.
 
 call print method for each hourglass.
 
-```{c++}
+```c++
   Hourglasses.print_all('R');
   // just print one on each line
 
@@ -415,7 +415,7 @@ call print method for each hourglass.
 
 Create a summary of all hourglasses. It's like print_all with names.
 
-```{c++}
+```c++
   Hourglasses.summary();
 ```
 
@@ -423,7 +423,7 @@ Create a summary of all hourglasses. It's like print_all with names.
 
 Get the number of hourglasses.
 
-```{c++}
+```c++
   short count = Hourglasses.count();
 ```
 
@@ -432,7 +432,7 @@ Get the number of hourglasses.
 
 Find the hourglass if by name
 
-```{c++}
+```c++
   short id = Hourglasses.find("clock1");
 ```
 
@@ -442,18 +442,18 @@ A better use is with dynamic names in String object.
 
 Set the output of the print-like functions.
 
-```{c++}
+```c++
   Hourglasses.setOutput(Serial2); // Set output to another Serial
 ```
 
 > Note: create method use this. The new created hourglass will not be updated.
 
-```{c++}
+```c++
   Hourglasses.setOutput(Serial2);
   Hourglasses.create(4);  // 4 hourglasses with Serial2 as output
 ```
 
-```{c++}
+```c++
   Hourglasses.create(4);  // 4 hourglasses with Serial as output
   Hourglasses.setOutput(Serial2);
   // hourglass print-like will output to Serial 2
