@@ -52,6 +52,10 @@ The method `println()` is one of the extra tools of this library. If you want to
 
 `elapsed()` method has an optional argument to select the unit output, in minutes, hours or days;
 
+# Boards
+
+Tested in ESP32 and ESP32-S
+
 # Docs
 
 Hourglass has many methods and other features like:
