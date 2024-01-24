@@ -1,12 +1,12 @@
 # Description
 
-An uptime library that do not overlap.
+Housglass is a time library that do not overlap.
 
 This library was made with two things in mind:
 
-* Strait forward to use in the simplest usage (one hourglass)
+* Strait forward to use in the simplest case (one hourglass)
 * Tools to cover tipical demand, as print and conversions
-* Extra optional tools to easy to create many hourgrasses
+* Optional tools to easy create, use and manipulate many hourgrasses
 
 The time is tracked in seconds (double).
 
